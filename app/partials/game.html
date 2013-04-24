@@ -1,13 +1,11 @@
-<div ng-controller="GameCtrl">
-  <div>
-    <label for="">Your name: </label><input type="text" ng-model="username">
-  </div>
+<div>
+  <h1>{{ title }}</div>
 
   <div class="board">
     <table>
-      <tr ng-repeat="i in [0,1,2]">
-        <td ng-repeat="j in [0,1,2]">
-          {{ i }}, {{ j }}
+      <tr ng-repeat="row in [0, 1, 2]">
+        <td ng-repeat="col in [0, 1, 2]" ng-click="move(row, col)" ng-mouseover="mouseOver(row, col, $event)" ng-mouseout="mouseOut($event)">
+          {{ game.board[row][col] }}
         </td>
       </tr>
     </table>

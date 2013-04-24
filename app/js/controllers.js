@@ -21,23 +21,61 @@ angular.module('ticTacToe.controllers', ['firebase', 'ngCookies'])
     }
   }])
 
-  .controller('GamesCtrl', ['$scope', '$cookies', 'angularFire', 'filterFilter', function($scope, $cookies, angularFire, filterFilter) {
+  .controller('GamesCtrl', ['$scope', '$routeParams', '$location', '$cookies', 'angularFire', 'filterFilter', function($scope, $routeParams, $location, $cookies, angularFire, filterFilter) {
     var url = 'https://jeffrey-wescott.firebaseio.com/tictactoe/games';
     var promise = angularFire(url, $scope, 'games');
 
     $scope.username = $cookies.username;
 
     promise.then(function(games) {
-      startWatch($scope, $cookies, filterFilter);
+      watchGames($scope, $location, $cookies, filterFilter);
     });
   }])
 
-  .controller('GameCtrl', ['$scope', '$cookies', 'angularFire', function($scope, $cookies, angularFire) {
+  .controller('GameCtrl', ['$scope', '$routeParams', '$location', '$cookies', 'angularFire', function($scope, $routeParams, $location, $cookies, angularFire) {
+    var url = 'https://jeffrey-wescott.firebaseio.com/tictactoe/games';
+    var promise = angularFire(url, $scope, 'games');
     $scope.username = $cookies.username;
+    promise.then(function(games) {
+      watchGame($scope, $routeParams);
+    });
   }]);
 
+function watchGame($scope, $routeParams) {
+  $scope.game = $scope.games[$routeParams.gameId];
+  console.log($scope.game);
+  $scope.$watch('game', function() {
+    if ($scope.game.player1 && $scope.game.player2) {
+      $scope.title = $scope.game.player1 + " vs. " + $scope.game.player2;
+    } else {
+      $scope.title = "Awaiting 2nd player ...";
+    }
+  });
 
-function startWatch($scope, $cookies, filter) {
+  $scope.mouseOver = function(row, col, $event) {
+    if ($scope.game.board[row][col] == '') {
+      $event.target.style.cursor = 'pointer';
+    }
+  };
+
+  $scope.mouseOut = function($event) {
+    $event.target.style.cursor = 'default';
+  };
+
+  $scope.move = function(row, col) {
+    if ($scope.game.board[row][col] != '') return;
+
+    if ($scope.username === $scope.game.player1) {
+      $scope.game.board[row][col] = 'X';
+    } else if ($scope.username === $scope.game.player2) {
+      $scope.game.board[row][col] = 'O';
+    }
+
+    console.log($scope.username);
+  };
+}
+
+function watchGames($scope, $location, $cookies, filter) {
   $scope.$watch('username', function() {
     $cookies.username = $scope.username;
   });
@@ -45,27 +83,29 @@ function startWatch($scope, $cookies, filter) {
   $scope.$watch('games', function () {
     console.log($scope.games);
     $scope.waitingGames = filter($scope.games, function(game) {
-      console.log(game);
-      return (typeof game.player2 === 'undefined');
+      if (typeof game === 'undefined') $scope.games.splice($scope.games.indexOf(game), 1);
+      var player2Undefined = (typeof game.player2 === 'undefined');
+      var player1NotCurrentUser = (game.player1 != $scope.username);
+      return  (player2Undefined && player1NotCurrentUser);
     });
-    console.log($scope.waitingGames);
   }, true);
 
   $scope.joinGame = function(game) {
     game.player2 = $scope.username;
-    console.log("game =", game);
+
+    $location.path("/games/" + $scope.games.indexOf(game));
   };
 
   $scope.createGame = function() {
-    console.log("$scope.username =", $scope.username);
-    console.log("$scope.games =", $scope.games);
     if (!$scope.username.length) {
       return;
     }
 
-    var game = $scope.games.push({
-      player1: $scope.username
-    });
-    console.log("game =", $scope.games[game]);
+    var gameId = $scope.games.push({
+      player1: $scope.username,
+      board: [['', '', ''], ['', '', ''], ['', '', '']]
+    }) - 1;
+
+    $location.path("/games/" + gameId);
   };
 }
