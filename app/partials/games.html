@@ -1,16 +1,16 @@
-<div>
-  <form ng-submit="createGame()">
-    <label for="username">Your name:</label>
-    <input type="text" ng-model="username" placeholder="What's your name?">
-    <input type="submit" value="Create New Game">
-  </form>
-</div>
-
 <div ng-controller="GamesCtrl">
-  <h2>Games Waiting for a Second Player</h2>
+  <div>
+    <form ng-submit="createGame()">
+      <label for="username">Your name:</label>
+      <input type="text" ng-model="username" placeholder="What's your name?">
+      <input type="submit" value="Create New Game">
+    </form>
+  </div>
 
   <div class="game-list">
-    <div ng-repeat="game in games">
+    <h2>Games Waiting for a Second Player</h2>
+
+    <div ng-repeat="game in waitingGames">
       <form ng-submit="joinGame(game)">
         <label class="game-label" for="player1">{{ game.player1 }} wants to play ...</label> 
         <input type="submit" value="Play {{ game.player1 }}">
