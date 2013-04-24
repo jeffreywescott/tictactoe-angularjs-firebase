@@ -55,11 +55,11 @@ label {
 }
 
 .board td {
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
   text-align: center;
-  line-height: 200px;
-  font-size: 70pt;
+  line-height: 150px;
+  font-size: 55pt;
   border-right: 1px solid;
   border-bottom: 1px solid;
 }
