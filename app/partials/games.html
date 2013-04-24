@@ -1,0 +1,15 @@
+<div ng-controller="GamesCtrl">
+  <div class="game-list">
+    <div ng-repeat="game in games">
+      <form ng-submit="joinGame(game)">
+        <input type="text" ng-model="username" placeholder="What's your name?">
+        {{ game.$$hashKey }}: <input type="submit" value="Join Game">
+      </form>
+    </div>
+  </div>
+
+  <form ng-submit="createGame()">
+    <input type="text" ng-model="username" placeholder="What's your name?">
+    <input type="submit" value="Create New Game">
+  </form>
+</div>

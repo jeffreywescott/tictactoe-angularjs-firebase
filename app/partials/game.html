@@ -1,0 +1,16 @@
+<div ng-controller="GameCtrl">
+  <div>
+    <label for="">Your name: </label><input type="text" ng-model="username">
+  </div>
+
+  <div class="board">
+    <table>
+      <tr ng-repeat="i in [0,1,2]">
+        <td ng-repeat="j in [0,1,2]">
+          {{ i }}, {{ j }}
+        </td>
+      </tr>
+    </table>
+  </div>
+
+</div>

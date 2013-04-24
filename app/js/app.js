@@ -6,5 +6,7 @@
 angular.module('ticTacToe', ['firebase', 'ticTacToe.filters', 'ticTacToe.services', 'ticTacToe.directives', 'ticTacToe.controllers']).
   config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/chat', {templateUrl: 'partials/chat.html', controller: 'ChatCtrl'});
-    $routeProvider.otherwise({redirectTo: '/chat'});
+    $routeProvider.when('/games', {templateUrl: 'partials/games.html'});
+    $routeProvider.when('/game', {templateUrl: 'partials/game.html', controller: 'GameCtrl'});
+    $routeProvider.otherwise({redirectTo: '/games'});
   }]);
