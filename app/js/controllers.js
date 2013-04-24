@@ -3,24 +3,6 @@
 /* Controllers */
 
 angular.module('ticTacToe.controllers', ['firebase', 'ngCookies'])  
-  .controller('ChatCtrl', ['$scope', '$timeout', 'angularFireCollection', function($scope, $timeout, angularFireCollection) {
-    console.log("got here ChatCtrl");
-
-    var el = document.getElementById("messagesDiv");
-    var url = 'https://jeffrey-wescott.firebaseio.com/chat';
-    $scope.messages = angularFireCollection(url, function() {
-      $timeout(function() { el.scrollTop = el.scrollHeight; });
-    });
-    $scope.username = 'Guest' + Math.floor(Math.random()*101);
-    console.log($scope.username);
-    $scope.addMessage = function() {
-      $scope.messages.add({from: $scope.username, content: $scope.message}, function() {
-        el.scrollTop = el.scrollHeight;
-      });
-      $scope.message = "";
-    }
-  }])
-
   .controller('GamesCtrl', ['$scope', '$routeParams', '$location', '$cookies', 'angularFire', 'filterFilter', function($scope, $routeParams, $location, $cookies, angularFire, filterFilter) {
     var url = 'https://jeffrey-wescott.firebaseio.com/tictactoe/games';
     var promise = angularFire(url, $scope, 'games');
