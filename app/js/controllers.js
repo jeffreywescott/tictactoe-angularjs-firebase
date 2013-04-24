@@ -24,9 +24,9 @@ angular.module('ticTacToe.controllers', ['firebase', 'ngCookies'])
   }]);
 
 function watchGame($scope, $routeParams) {
-  $scope.game = $scope.games[$routeParams.gameId];
-  console.log($scope.game);
-  $scope.$watch('game', function() {
+  $scope.$watch('games', function() {
+    $scope.game = $scope.games[$routeParams.gameId];
+    console.log($scope.game);
     if ($scope.game.player1 && $scope.game.player2) {
       $scope.title = $scope.game.player1 + " vs. " + $scope.game.player2;
     } else {
@@ -35,6 +35,7 @@ function watchGame($scope, $routeParams) {
   });
 
   $scope.mouseOver = function(row, col, $event) {
+    console.log(row + "," + col + ": " + $scope.game.board[row][col]);
     if ($scope.game.board[row][col] == '') {
       $event.target.style.cursor = 'pointer';
     }
