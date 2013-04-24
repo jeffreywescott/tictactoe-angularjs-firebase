@@ -35,6 +35,7 @@ label {
   margin: 0 auto;
   background: #efefef;
   padding: 1em;
+  text-align: center;
 }
 
 .game-label {
@@ -46,7 +47,7 @@ label {
 
 
 .board {
-  width: 800px;
+  width: 450px;
   margin: 0px auto;
 }
 
