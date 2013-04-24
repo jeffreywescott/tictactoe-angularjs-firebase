@@ -1,3 +1,50 @@
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background: #000;
+  color: #efefef;
+}
+
+header h1 {
+  margin: 0 0 1em 1em;
+}
+
+footer {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  background: #000;
+  color: #efefef;
+  border-top: 1px dotted gray;
+  padding: 1em 0;
+  padding-top: 1em;
+  font-size: 0.8em;
+  text-align: center;
+}
+
+label {
+  font-weight: bold;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+  background: #efefef;
+  padding: 1em;
+}
+
+.game-label {
+  display: inline-block;
+  width: 15em;
+  text-align: right;
+  font-weight: normal;
+}
+
+
 .board {
   width: 800px;
   margin: 0px auto;
@@ -24,3 +71,4 @@
 .board tr:last-child td {
   border-bottom: none;
 }
+
