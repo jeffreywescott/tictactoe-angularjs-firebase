@@ -3,5 +3,5 @@
 /* Services */
 
 angular.module('ticTacToe.services', [])
-  .value('version', '0.1')
-  .value('name', 'Tic-Tac-Toe');
+  .constant('version', '0.1')
+  .constant('name', 'Tic-Tac-Toe');
