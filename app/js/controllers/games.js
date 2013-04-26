@@ -28,9 +28,10 @@ function watchGames($scope, $location, $cookies, filter) {
   }, true);
 
   $scope.joinGame = function(game) {
-    game.player2 = $scope.username;
+    var game = new Game(game);
+    game.addPlayer($scope.username);
 
-    $location.path("/games/" + $scope.games.indexOf(game));
+    $location.path("/games/" + $scope.games.indexOf(game.data));
   };
 
   $scope.createGame = function() {
@@ -38,10 +39,9 @@ function watchGames($scope, $location, $cookies, filter) {
       return;
     }
 
-    var gameId = $scope.games.push({
-      player1: $scope.username,
-      board: [['', '', ''], ['', '', ''], ['', '', '']]
-    }) - 1;
+    var game = new Game();
+    game.addPlayer($scope.username);
+    var gameId = $scope.games.push(game.data) - 1;
 
     $location.path("/games/" + gameId);
   };

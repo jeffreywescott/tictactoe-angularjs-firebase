@@ -1,11 +1,11 @@
 <div>
-  <h1>{{ title }}</div>
+  <h1>{{ game.title() }}</div>
 
   <div class="board">
     <table>
       <tr ng-repeat="row in [0, 1, 2]">
-        <td ng-repeat="col in [0, 1, 2]" ng-click="move(row, col)" ng-mouseover="mouseOver(row, col, $event)" ng-mouseout="mouseOut($event)">
-          {{ game.board[row][col] }}
+        <td ng-repeat="col in [0, 1, 2]" ng-click="game.move(username, row, col)" ng-mouseover="mouseOver(username, row, col, $event)" ng-mouseout="mouseOut($event)">
+          {{ game.board()[row][col] }}
         </td>
       </tr>
     </table>
