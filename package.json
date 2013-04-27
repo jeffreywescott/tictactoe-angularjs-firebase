@@ -2,7 +2,7 @@
   "name": "tictactoe-angularjs-firebase",
   "version": "0.1.0",
   "description": "Tic-Tac-Toe (built with AngularJS and Firebase)",
-  "main": "scripts/web-server.js",
+  "main": "web.js",
   "directories": {
     "test": "test"
   },
