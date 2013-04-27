@@ -1,0 +1,28 @@
+{
+  "name": "tictactoe-angularjs-firebase",
+  "version": "0.1.0",
+  "description": "Tic-Tac-Toe (built with AngularJS and Firebase)",
+  "main": "scripts/web-server.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "node-static": "~0.6.9"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/binaryfeed/tictactoe-angularjs-firebase.git"
+  },
+  "keywords": [
+    "angularjs",
+    "firebase"
+  ],
+  "author": "Jeffrey Wescott",
+  "license": "BSD",
+  "readmeFilename": "README.md",
+  "gitHead": "58f1825bcd34fa7456edec3646417b930634d103"
+}
