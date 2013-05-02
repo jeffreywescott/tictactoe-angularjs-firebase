@@ -13,6 +13,11 @@ header h1 {
   margin: 0 0 1em 1em;
 }
 
+header a {
+  text-decoration: none;
+  color: #efefef;
+}
+
 footer {
   position: fixed;
   width: 100%;
