@@ -2,7 +2,7 @@
 
 angular.module('ticTacToe.controllers.games', ['firebase', 'ngCookies'])  
   .controller('GamesCtrl', ['$scope', '$routeParams', '$location', '$cookies', 'angularFire', 'filterFilter', function($scope, $routeParams, $location, $cookies, angularFire, filterFilter) {
-    var url = 'https://jeffrey-wescott.firebaseio.com/tictactoe/games';
+    var url = 'https://jeffrey-wescott.firebaseio.com/tictactoe/games/active';
     var promise = angularFire(url, $scope, 'games');
 
     $scope.username = $cookies.username;
