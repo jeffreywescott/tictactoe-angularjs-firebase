@@ -6,6 +6,7 @@ angular.module('ticTacToe.controllers.games', ['firebase', 'ngCookies'])
     var promise = angularFire(url, $scope, 'games');
 
     $scope.username = $cookies.username;
+    $scope.usernameEntered = ($scope.username && $scope.username.length > 0);
 
     promise.then(function(games) {
       watchGames($scope, $location, $cookies, filterFilter);
@@ -15,6 +16,11 @@ angular.module('ticTacToe.controllers.games', ['firebase', 'ngCookies'])
 function watchGames($scope, $location, $cookies, filter) {
   $scope.$watch('username', function() {
     $cookies.username = $scope.username;
+    if ($scope.username && $scope.username.length > 0) {
+      $scope.usernameEntered = false;
+    } else {
+      $scope.usernameEntered = true;
+    }
   });
 
   $scope.$watch('games', function () {
