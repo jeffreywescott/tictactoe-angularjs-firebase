@@ -7,7 +7,8 @@ var port = process.env.PORT || 5000;
 require('http').createServer(function (request, response) {
   file.serve(request, response, function(err, result) {
     if (err) {
-      console.error('ERROR (%d): %s %s', response.statusCode, request.method, request.url, err.message);
+      //console.log(util.inspect(err, false, null));
+      console.error('ERROR: %s %s -  (%d) %s', request.method, request.url, err.status, err.message);
     } else {
       console.log('%s %s - (%d)', request.method, request.url, response.statusCode);
     }
