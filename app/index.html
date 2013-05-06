@@ -1,35 +1,37 @@
 <!doctype html>
 <html lang="en" ng-app="ticTacToe">
-<head>
-  <meta charset="utf-8">
-  <title app-name></title>
-  <link rel="stylesheet" href="css/app.css"/>
-</head>
-<body>
-  <header>
-    <a href="/"><h1 app-name></h1></a>
-  </header>
+  <head>
+    <meta charset="utf-8">
+    <title app-name></title>
+    <link rel="stylesheet" href="css/app.css"/>
+  </head>
+  <body>
+    <header>
+      <a href="/"><h1 app-name></h1></a>
+    </header>
 
-  <div class="container" ng-view></div>
+    <div class="container" ng-view></div>
 
-  <footer>
-    <span app-name></span>: v<span app-version></span>
-  </footer>
+    <footer>
+      <span app-name></span>: v<span app-version></span>
+    </footer>
 
-  <!-- in production, use: -->
-  <script src="//cdn.firebase.com/v0/firebase.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular-cookies.min.js"></script>
-  <!-- in development, use: -->
-  <!-- <script src="lib/firebase.js"></script> -->
-  <!-- <script src="lib/angular/angular.js"></script> -->
-  <!-- <script src="lib/angularfire.min.js"></script> -->
-  <script src="lib/angularfire.min.js"></script>  
-  <script src="js/app.js"></script>
-  <script src="js/services.js"></script>
-  <script src="js/controllers/game.js"></script>
-  <script src="js/controllers/games.js"></script>
-  <script src="js/filters.js"></script>
-  <script src="js/directives.js"></script>
-</body>
+    <script src="//cdn.firebase.com/v0/firebase.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular-cookies.min.js"></script>
+    <!--
+    <script src="lib/angularfire.min.js"></script>
+    <script src="lib/firebase.js"></script>
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular/angular-cookies.js"></script>
+    -->
+    <script src="lib/angularFire.js"></script>
+
+    <script src="js/app.js"></script>
+    <script src="js/services.js"></script>
+    <script src="js/controllers/game.js"></script>
+    <script src="js/controllers/games.js"></script>
+    <script src="js/filters.js"></script>
+    <script src="js/directives.js"></script>
+  </body>
 </html>

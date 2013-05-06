@@ -142,8 +142,8 @@ Game.prototype = {
 
 angular.module('ticTacToe.controllers.game', ['firebase', 'ngCookies'])  
   .controller('GameCtrl', ['$scope', '$routeParams', '$location', '$cookies', 'angularFire', function($scope, $routeParams, $location, $cookies, angularFire) {
-    var url = 'https://jeffrey-wescott.firebaseio.com/tictactoe/games/active';
-    var promise = angularFire(url, $scope, 'games');
+    var url = 'https://tictactoe-angularjs.firebaseio.com/games/active/' + $routeParams.gameId;
+    var promise = angularFire(url, $scope, 'gameData', {});
     $scope.gameOver = false;
     $scope.username = $cookies.username;
     promise.then(function(games) {
@@ -152,8 +152,8 @@ angular.module('ticTacToe.controllers.game', ['firebase', 'ngCookies'])
   }]);
 
 function watchGame($scope, $routeParams) {
-  $scope.$watch('games', function() {
-    $scope.game = new Game($scope.games[$routeParams.gameId]);
+  $scope.$watch('gameData', function() {
+    $scope.game = new Game($scope.gameData);
     console.log($scope.game);
   });
 

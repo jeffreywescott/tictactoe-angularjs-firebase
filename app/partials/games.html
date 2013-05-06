@@ -3,7 +3,7 @@
     <form ng-submit="createGame()">
       <label for="username">Your name:</label>
       <input type="text" ng-model="username" placeholder="What's your name?">
-      <button ng-disabled="usernameEntered" type="submit">Create New Game</button>
+      <button ng-disabled="usernameNotEntered" type="submit">Create New Game</button>
     </form>
   </div>
 
@@ -12,7 +12,7 @@
 
     <div ng-repeat="game in waitingGames">
       <span class="game-label">{{ game.player1 }} wants to play ...</span>
-      <button ng-disabled="usernameEntered" ng-click="joinGame(game)">Play {{ game.player1 }}</button>
+      <button ng-disabled="usernameNotEntered" ng-click="joinGame(game)">Play {{ game.player1 }}</button>
     </div>
   </div>
 
