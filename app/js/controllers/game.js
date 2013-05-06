@@ -55,8 +55,8 @@ Game.prototype = {
   isAbandoned: function() {
     if (!this.data.disconnected) return false;
     var numPlayers = 0;
-    if (player1) numPlayers++;
-    if (Player2) numPlayers++;
+    if (this.data.player1) numPlayers++;
+    if (this.data.player2) numPlayers++;
     var numDisconnected = 0;
     for (var k in this.data.disconnected) {
       if (this.data.disconnected[k]) numDisconnected++;
