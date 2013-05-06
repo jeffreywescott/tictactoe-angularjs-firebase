@@ -9,6 +9,7 @@ function Game(data) {
       whoseTurn: null,
       player1: null,
       player2: null,
+      disconnected: {},
       title: "Awaiting players ...",
       board: [['', '', ''], ['', '', ''], ['', '', '']]
     };
@@ -44,6 +45,20 @@ Game.prototype = {
   },
   board: function() {
     return this.data.board;
+  },
+  setConnected: function(player) {
+    if (!this.data.disconnected) {
+      this.data.disconnected = {};
+    }
+    this.data.disconnected[player] = false;
+  },
+  isAbandoned: function() {
+    if (!this.data.disconnected) return false;
+    var numDisconnected = 0;
+    for (var k in this.data.disconnected) {
+      if (this.data.disconnected[k]) numDisconnected++;
+    }
+    return (numDisconnected == 2);
   },
   isTie: function() {
     for (var row in [0,1,2]) {
@@ -144,10 +159,12 @@ angular.module('ticTacToe.controllers.game', ['firebase', 'ngCookies'])
   .controller('GameCtrl',
     ['$scope', '$routeParams', '$location', '$cookies', 'angularFire', 'angularFireCollection',
     function($scope, $routeParams, $location, $cookies, angularFire, angularFireCollection) {
-      var url = 'https://tictactoe-angularjs.firebaseio.com/games/' + $routeParams.gameId;
-      var promise = angularFire(url, $scope, 'gameData', {});
-      $scope.gameOver = false;
       $scope.username = $cookies.username;
+
+      var gameUrl = 'https://tictactoe-angularjs.firebaseio.com/games/' + $routeParams.gameId;
+      var disconnectedRef = new Firebase(gameUrl + "/disconnected/" + $scope.username);
+      disconnectedRef.onDisconnect().set(true);
+      var promise = angularFire(gameUrl, $scope, 'gameData', {});
       promise.then(function(game) {
         watchGame($scope, $routeParams, angularFire, angularFireCollection);
       });
@@ -157,6 +174,7 @@ angular.module('ticTacToe.controllers.game', ['firebase', 'ngCookies'])
 function watchGame($scope, $routeParams, angularFire, angularFireCollection) {
   $scope.$watch('gameData', function() {
     $scope.game = new Game($scope.gameData);
+    $scope.game.setConnected($scope.username);
   });
 
   $scope.mouseOver = function(player, row, col, $event) {
