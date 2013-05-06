@@ -43,13 +43,6 @@ label {
   text-align: center;
 }
 
-.game-label {
-  display: inline-block;
-  width: 15em;
-  text-align: right;
-  font-weight: normal;
-}
-
 
 .board {
   width: 450px;

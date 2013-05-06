@@ -1,4 +1,5 @@
 <div>
+
   <div>
     <form ng-submit="createGame()">
       <label for="username">Your name:</label>
@@ -7,11 +8,10 @@
     </form>
   </div>
 
-  <div class="game-list">
+  <div ng-show="waitingGames.length > 0" class="game-list">
     <h2>Games Waiting for a Second Player</h2>
 
     <div ng-repeat="game in waitingGames">
-      <span class="game-label">{{ game.player1 }} wants to play ...</span>
       <button ng-disabled="usernameNotEntered" ng-click="joinGame(game)">Play {{ game.player1 }}</button>
     </div>
   </div>
