@@ -141,20 +141,22 @@ Game.prototype = {
 
 
 angular.module('ticTacToe.controllers.game', ['firebase', 'ngCookies'])  
-  .controller('GameCtrl', ['$scope', '$routeParams', '$location', '$cookies', 'angularFire', function($scope, $routeParams, $location, $cookies, angularFire) {
-    var url = 'https://tictactoe-angularjs.firebaseio.com/games/active/' + $routeParams.gameId;
-    var promise = angularFire(url, $scope, 'gameData', {});
-    $scope.gameOver = false;
-    $scope.username = $cookies.username;
-    promise.then(function(games) {
-      watchGame($scope, $routeParams);
-    });
-  }]);
+  .controller('GameCtrl',
+    ['$scope', '$routeParams', '$location', '$cookies', 'angularFire', 'angularFireCollection',
+    function($scope, $routeParams, $location, $cookies, angularFire, angularFireCollection) {
+      var url = 'https://tictactoe-angularjs.firebaseio.com/games/' + $routeParams.gameId;
+      var promise = angularFire(url, $scope, 'gameData', {});
+      $scope.gameOver = false;
+      $scope.username = $cookies.username;
+      promise.then(function(game) {
+        watchGame($scope, $routeParams, angularFire, angularFireCollection);
+      });
+    }]
+  );
 
-function watchGame($scope, $routeParams) {
+function watchGame($scope, $routeParams, angularFire, angularFireCollection) {
   $scope.$watch('gameData', function() {
     $scope.game = new Game($scope.gameData);
-    console.log($scope.game);
   });
 
   $scope.mouseOver = function(player, row, col, $event) {

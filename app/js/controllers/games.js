@@ -8,7 +8,7 @@ angular.module('ticTacToe.controllers.games', ['firebase', 'ngCookies'])
       $scope.usernameNotEntered = ($scope.username && $scope.username.length > 0) ? false : true;
       watchUsername($scope, $cookies);
 
-      var url = 'https://tictactoe-angularjs.firebaseio.com/games/active';
+      var url = 'https://tictactoe-angularjs.firebaseio.com/games';
       $scope.activeGames = angularFireCollection(url);
       watchGames($scope, $location, filterFilter);
       // var promise = angularFire(url, $scope, 'games');
