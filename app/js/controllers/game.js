@@ -54,11 +54,14 @@ Game.prototype = {
   },
   isAbandoned: function() {
     if (!this.data.disconnected) return false;
+    var numPlayers = 0;
+    if (player1) numPlayers++;
+    if (Player2) numPlayers++;
     var numDisconnected = 0;
     for (var k in this.data.disconnected) {
       if (this.data.disconnected[k]) numDisconnected++;
     }
-    return (numDisconnected == 2);
+    return (numDisconnected == numPlayers);
   },
   isTie: function() {
     for (var row in [0,1,2]) {
